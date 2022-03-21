@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: install graphviz
-        run: apt-get install graphviz
+        run: sudo apt-get install graphviz
       - name: build the docs
         run: make
       - uses: EndBug/add-and-commit@v7
