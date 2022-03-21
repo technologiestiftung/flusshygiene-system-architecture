@@ -53,7 +53,9 @@
 <g id="node5" class="node">
 <title>mailer</title>
 <path fill="none" stroke="lightblue" stroke-width="5" d="M1048,-782C1048,-782 834,-782 834,-782 828,-782 822,-776 822,-770 822,-770 822,-722 822,-722 822,-716 828,-710 834,-710 834,-710 1048,-710 1048,-710 1054,-710 1060,-716 1060,-722 1060,-722 1060,-770 1060,-770 1060,-776 1054,-782 1048,-782"/>
-<text text-anchor="middle" x="941" y="-742.3" font-family="Arial" font-size="14.00">Mailer</text>
+<text text-anchor="middle" x="941" y="-757.3" font-family="Arial" font-size="14.00">Mailer</text>
+<text text-anchor="middle" x="941" y="-742.3" font-family="Arial" font-size="14.00">For sending mail</text>
+<text text-anchor="middle" x="941" y="-727.3" font-family="Arial" font-size="14.00">from within the SPA</text>
 </g>
 <!-- spa&#45;&gt;mailer -->
 <g id="edge14" class="edge">
@@ -93,7 +95,8 @@
 <g id="node2" class="node">
 <title>ngx</title>
 <path fill="none" stroke="lightblue" stroke-width="5" d="M284,-727C284,-727 70,-727 70,-727 64,-727 58,-721 58,-715 58,-715 58,-667 58,-667 58,-661 64,-655 70,-655 70,-655 284,-655 284,-655 290,-655 296,-661 296,-667 296,-667 296,-715 296,-715 296,-721 290,-727 284,-727"/>
-<text text-anchor="middle" x="177" y="-687.3" font-family="Arial" font-size="14.00">Nginx gateway</text>
+<text text-anchor="middle" x="177" y="-694.8" font-family="Arial" font-size="14.00">Nginx</text>
+<text text-anchor="middle" x="177" y="-679.8" font-family="Arial" font-size="14.00">Reverse Proxy</text>
 </g>
 <!-- ngx&#45;&gt;spa -->
 <g id="edge9" class="edge">
