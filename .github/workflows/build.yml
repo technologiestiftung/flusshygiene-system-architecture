@@ -1,4 +1,4 @@
-name: Build with pandoc
+name: Build with graphviz
 
 on:
   workflow_dispatch:
