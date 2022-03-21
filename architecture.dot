@@ -26,10 +26,10 @@ digraph G{
     margin="50,50";
 
     spa[label="CMS SPA\nWeb Frontend", color=lightblue];
-    ngx[label="Nginx gateway", rank=max, color=lightblue];
+    ngx[label="Nginx\nReverse Proxy", rank=max, color=lightblue];
     ocpu_api[label="OCPU API\n Using FHpredict R package\nfrom KWB", color=lightblue]
     api[label="API", color=lightblue];
-    mailer[label="Mailer",color=lightblue];
+    mailer[label="Mailer\nFor sending mail\nfrom within the SPA",color=lightblue];
     ocpu_middleware[
       label="OCPU middleware\n for long running processes",
       color=lightblue];

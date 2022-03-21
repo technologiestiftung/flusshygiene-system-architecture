@@ -2,4 +2,4 @@
 
 This is a graphviz flowchart of the all the components that make up the Flusshygiene project.
 
-[![](./architecture.dot.svg)](./architecture.dot.svg)
+[![](./architecture.dot.svg)](https://technologiestiftung.github.io/flusshygiene-system-architecture/)
