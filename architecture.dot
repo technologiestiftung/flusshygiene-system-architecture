@@ -1,0 +1,135 @@
+digraph G{
+  rankdir="LR";
+  fontname = "Arial";
+  fontsize = 14;
+  penwidth = 5;
+  style="rounded";
+  margin="50,50";
+  graph [splines=ortho, nodesep=1, ranksep=2];
+
+  node [shape=box,
+    style=filled,
+    fixedsize=true,
+    style="rounded",
+    penwidth = 5,
+    width=2.0,
+    fontname = "Arial",
+    fontsize = 14,
+    height=1,
+    width=3.3];
+  edge [shape="none", style=filled, color=black, weight=3, penwidth=2 ];
+
+
+
+  subgraph cluster_docker{
+    label="Docker Network";
+    margin="50,50";
+
+    spa[label="CMS SPA\nWeb Frontend", color=lightblue];
+    ngx[label="Nginx gateway", rank=max, color=lightblue];
+    ocpu_api[label="OCPU API\n Using FHpredict R package\nfrom KWB", color=lightblue]
+    api[label="API", color=lightblue];
+    mailer[label="Mailer",color=lightblue];
+    ocpu_middleware[
+      label="OCPU middleware\n for long running processes",
+      color=lightblue];
+
+    }
+  subgraph cluster_services{
+    label="Services";
+    node[color="#90ee90"];
+    auth0 [label="Auth0\nAuthentication Service"];
+    pipedream[label="Pipedream\nCronjob Service"];
+    github_actions[label="Github Actions\nCronjob Runner Service"];
+
+
+    spa -> auth0[dir=both];
+    api -> auth0[dir=both];
+    ocpu_api -> auth0[dir=both];
+
+
+    pipedream -> github_actions;
+  }
+
+    github_actions -> cronbot;
+    github_actions -> radolan_recent_to_s3;
+    github_actions -> data_pred_merge;
+    github_actions -> data_transfer;
+
+
+  ngx -> spa[dir=both];
+  spa -> api[ dir=both];
+  api -> db;
+  ocpu_api-> db [arrowhead=normal];
+  api -> redis [dir=both];
+  spa -> mailer;
+  spa -> ocpu_middleware[dir=both];
+  ocpu_middleware -> ocpu_api [dir=both];
+  ocpu_api -> api [dir=both];
+
+  api -> s3 [dir=both];
+  edge[weight=2];
+
+  subgraph cluster_aws {
+    style=rounded;
+    margin="50,50";
+    rank=max;
+    label="AWS";
+    db [label="DB\nPostgres with Postgis", color=tomato];
+    redis[label="In Memory DB\nRedis", color=tomato];
+    s3[label="public file storage\nS3", color=tomato];
+    radolan_api[label="Radolan Data API\nAWS Lambda using\nserverless framework", color=tomato];
+
+  }
+
+  edge[weight=1];
+  subgraph cluster_cron {
+    style=rounded;
+    rankdir=TB;
+
+
+    label="Cronjobs Node.js";
+    cronbot[label="Cronbot\nCollect User data and predict", rank=min];
+    radolan_recent_to_s3 [label="Radolan\nScraper DWD to S3"];
+    data_transfer[label="BWB\nScrape public data from BWB to S3"];
+    data_pred_merge[label="LAGESO\nCollect predictions\n and merge with data from lageso"];
+  }
+
+    data_pred_merge -> api;
+    data_transfer -> s3;
+    data_pred_merge -> s3[];
+    cronbot -> s3 [arrowtail=normal, dir=back];
+    cronbot -> api;
+    radolan_recent_to_s3 -> s3;
+    radolan_api -> s3 [arrowtail=normal, dir=back];
+    ocpu_api -> radolan_api;
+
+
+
+  // subgraph cluster_sourcecode{
+  //   label="Source Code";
+  //   style=rounded;
+  //   rank=min;
+
+  //   penwidth = 1;
+  //   margin="50,50";
+  //   node[penwidth=1];
+  //   flsshygn_source[label="technologiestiftung/\nflusshygiene"];
+  //   kwb_source[label="KWB-R/\nfhpredict"]
+  //   data_transfer_source[label="technologiestiftung/\nflusshygiene-berlin-data-transfer"]
+  //   pred_merge_source[label="flusshygiene-berlin-prediction-merge"]
+  //   edge[weight=1, constraint=true, dir=none, style=dashed];
+  //   ngx -> flsshygn_source;
+  //   spa -> flsshygn_source;
+  //   mailer -> flsshygn_source;
+  //   ocpu_middleware -> flsshygn_source;
+  //   api -> flsshygn_source;
+  //   ocpu_api -> flsshygn_source;
+  //   ocpu_api -> kwb_source;
+  //   cronbot -> flsshygn_source;
+  //   data_pred_merge -> pred_merge_source;
+  //   data_transfer -> data_transfer_source;
+  //   }
+
+}
+

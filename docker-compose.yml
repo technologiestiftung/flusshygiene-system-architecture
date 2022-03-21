@@ -1,0 +1,10 @@
+version: '3.9'
+
+services:
+  flusshygienesystemarchitecture:
+    image: technologiestiftung/flusshygiene-system-architecture
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./:/source
