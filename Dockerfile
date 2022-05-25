@@ -1,4 +1,4 @@
-FROM ubuntu:focal
+FROM ubuntu:jammy
 LABEL Name=flusshygienesystemarchitecture Version=0.0.1
 RUN apt-get -y update && apt-get install -y graphviz make
 WORKDIR /source
